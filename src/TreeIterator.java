@@ -8,8 +8,6 @@ import java.util.Stack;
  */
 public class TreeIterator<E> implements Iterator<E> {
 
-    private Stack<Tree<E>> stack = new Stack<>();
-
     /**
      * Constructs a new tree iterator from the root of the tree to iterate over
      *
@@ -17,25 +15,8 @@ public class TreeIterator<E> implements Iterator<E> {
      * This method should have O(1) time complexity
      */
     public TreeIterator(Tree<E> root) {
-        stack.add(root);
+
     }
 
-    @Override
-    public boolean hasNext() {
-        return !stack.isEmpty();
-    }
-
-    @Override
-    public E next() {
-        if (!hasNext())
-            throw new NoSuchElementException("Iterator has no next.");
-        Tree<E> nextTree = stack.pop();
-        List<Tree<E>> children = nextTree.getChildren();
-        for (int i = 0; i < children.size(); i++) {
-            // iterate backwards so leftmost child is on top of the stack.
-            int index = children.size()-1 - i;
-            stack.add(children.get(index));
-        }
-        return nextTree.getRoot();
-    }
+    // TODO: implement this iterator
 }
