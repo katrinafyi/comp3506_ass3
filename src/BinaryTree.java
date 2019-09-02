@@ -103,13 +103,15 @@ public class BinaryTree<E> implements Tree<E> {
      * it tests if tree is a BST and its elements are >= lb and <= ub.
      *
      * By definition, the last value-containing node in a branch must have two
-     * child nodes, both with null values and no children. Yes, this definition
+     * child nodes--both with null values and no children. Yes, this definition
      * sucks. Direct your complaint to Goodrich, Tamassia and Goldwasser.
      *
      * This implementation will reject (i.e. return false for) any tree
-     * which does not meet the above criteria.
+     * which does not meet the above criteria. Note that this function is called
+     * exactly once for every node in the tree (including the null-holding end
+     * nodes).
      *
-     * @param tree Root node of tree. Value of this node must be non-null.
+     * @param tree Root node of tree.
      * @param lb Lower bound of values in the BST.
      * @param ub Upper bound of values in the BST.
      * @param <T> Comparable type of values in BST.

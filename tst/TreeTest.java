@@ -102,4 +102,30 @@ public class TreeTest {
 
         assertEquals(false, BinaryTree.isBST(tree));
     }
+
+    @Test
+    public void testIsNotBS3() {
+        BinaryTree<Integer> tree = new BinaryTree<>(2);
+        BinaryTree<Integer> left = new BinaryTree<>(1);
+        BinaryTree<Integer> right = new BinaryTree<>(null);
+
+        tree.setLeft(left);
+        tree.setRight(right);
+
+        left.setLeft(new BinaryTree<>(null));
+        left.setRight(new BinaryTree<>(null));
+        right.setLeft(new BinaryTree<>(null));
+        right.setRight(new BinaryTree<>(null));
+
+        assertEquals(false, BinaryTree.isBST(tree));
+    }
+
+    @Test
+    public void testEmptyBST() {
+        BinaryTree<Integer> tree = new BinaryTree<>(null);
+
+        assertEquals(true, BinaryTree.isBST(tree));
+
+    }
+
 }
