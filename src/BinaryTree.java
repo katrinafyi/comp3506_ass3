@@ -98,19 +98,48 @@ public class BinaryTree<E> implements Tree<E> {
         return right;
     }
 
+    /**
+     * Tests whether the given tree can be a subtree of a BST. More specifically,
+     * it tests if tree is a BST and its elements are >= lb and <= ub.
+     *
+     * By definition, the last value-containing node in a branch must have two
+     * child nodes, both with null values and no children. Yes, this definition
+     * sucks. Direct your complaint to Goodrich, Tamassia and Goldwasser.
+     *
+     * This implementation will reject (i.e. return false for) any tree
+     * which does not meet the above criteria.
+     *
+     * @param tree Root node of tree. Value of this node must be non-null.
+     * @param lb Lower bound of values in the BST.
+     * @param ub Upper bound of values in the BST.
+     * @param <T> Comparable type of values in BST.
+     * @return True if tree is a BST, false otherwise.
+     */
     private static <T extends Comparable<T>> boolean
                 isBSTHelper(BinaryTree<T> tree, T lb, T ub) {
+        if (lb != null && tree.getRoot().compareTo(lb) < 0)
+            return false;
+        if (ub != null && tree.getRoot().compareTo(ub) > 0)
+            return false;
+
         BinaryTree<T> left = tree.getLeft();
-        if (left != null) {
-            if (lb != null && left.getRoot().compareTo(lb) < 0)
+        if (left == null)
+            return false;
+        if (left.getRoot() == null) {
+            if (!left.isLeaf())
                 return false;
+        } else {
             if (!isBSTHelper(left, lb, tree.getRoot()))
                 return false;
         }
+
         BinaryTree<T> right = tree.getRight();
-        if (right != null) {
-            if (ub != null && right.getRoot().compareTo(ub) > 0)
+        if (right == null)
+            return false;
+        if (right.getRoot() == null) {
+            if (!right.isLeaf())
                 return false;
+        } else {
             if (!isBSTHelper(right, tree.getRoot(), ub))
                 return false;
         }
