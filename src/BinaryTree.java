@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -10,11 +9,6 @@ import java.util.List;
  * @param <E> the type of the tree's elements
  */
 public class BinaryTree<E> implements Tree<E> {
-    private class MinMax<T extends Comparable<T>> {
-        private T min;
-        private T max;
-    }
-
     private E root; // the element sitting at this tree's root node
     private BinaryTree<E> left; // the left child (subtree)
     private BinaryTree<E> right; // the right child (subtree)
@@ -112,8 +106,6 @@ public class BinaryTree<E> implements Tree<E> {
      * @return true if this tree is a BST, otherwise false
      */
     public static <T extends Comparable<T>> boolean isBST(BinaryTree<T> tree) {
-
-
         return false; // TODO: implement this method
     }
 }
