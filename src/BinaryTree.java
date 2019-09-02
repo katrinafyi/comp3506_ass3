@@ -116,33 +116,25 @@ public class BinaryTree<E> implements Tree<E> {
      * @return True if tree is a BST, false otherwise.
      */
     private static <T extends Comparable<T>> boolean
-                isBSTHelper(BinaryTree<T> tree, T lb, T ub) {
+            isBSTSubtree(BinaryTree<T> tree, T lb, T ub) {
+        if (tree == null)
+            return false;
+        if (tree.getRoot() == null)
+            return tree.isLeaf();
+
         if (lb != null && tree.getRoot().compareTo(lb) < 0)
             return false;
         if (ub != null && tree.getRoot().compareTo(ub) > 0)
             return false;
 
         BinaryTree<T> left = tree.getLeft();
-        if (left == null)
+        if (!isBSTSubtree(left, lb, tree.getRoot()))
             return false;
-        if (left.getRoot() == null) {
-            if (!left.isLeaf())
-                return false;
-        } else {
-            if (!isBSTHelper(left, lb, tree.getRoot()))
-                return false;
-        }
 
         BinaryTree<T> right = tree.getRight();
-        if (right == null)
+        if (!isBSTSubtree(right, tree.getRoot(), ub))
             return false;
-        if (right.getRoot() == null) {
-            if (!right.isLeaf())
-                return false;
-        } else {
-            if (!isBSTHelper(right, tree.getRoot(), ub))
-                return false;
-        }
+
         return true;
     }
 
@@ -154,6 +146,6 @@ public class BinaryTree<E> implements Tree<E> {
      * @return true if this tree is a BST, otherwise false
      */
     public static <T extends Comparable<T>> boolean isBST(BinaryTree<T> tree) {
-        return isBSTHelper(tree, null, null);
+        return isBSTSubtree(tree, null, null);
     }
 }
