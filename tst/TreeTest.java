@@ -121,6 +121,24 @@ public class TreeTest {
     }
 
     @Test
+    public void testEqualBST() {
+        BinaryTree<Integer> tree = new BinaryTree<>(2);
+        BinaryTree<Integer> left = new BinaryTree<>(2);
+        BinaryTree<Integer> right = new BinaryTree<>(2);
+
+        tree.setLeft(left);
+        tree.setRight(right);
+
+        left.setLeft(new BinaryTree<>(null));
+        left.setRight(new BinaryTree<>(null));
+        right.setLeft(new BinaryTree<>(null));
+        right.setRight(new BinaryTree<>(null));
+
+        assertEquals(true, BinaryTree.isBST(tree));
+    }
+
+
+    @Test
     public void testEmptyBST() {
         BinaryTree<Integer> tree = new BinaryTree<>(null);
 
@@ -129,10 +147,37 @@ public class TreeTest {
 
     @Test
     public void testIsBSTBigger() {
-        BinaryTree<Integer> t1 = new BinaryTree<>(0);
-        BinaryTree<Integer> t2 = new BinaryTree<>(-10);
-        BinaryTree<Integer> t3 = new BinaryTree<>(10);
-        BinaryTree<Integer> t4 = new BinaryTree<>(-15)
+        BinaryTree<Integer> tree0 = new BinaryTree<Integer>(100);
+        BinaryTree<Integer> tree1 = new BinaryTree<Integer>(50);
+        BinaryTree<Integer> tree2 = new BinaryTree<Integer>(-1);
+        BinaryTree<Integer> tree3 = new BinaryTree<Integer>(-10);
+        BinaryTree<Integer> tree4 = new BinaryTree<Integer>(null);
+        tree3.setLeft(tree4);
+        BinaryTree<Integer> tree5 = new BinaryTree<Integer>(null);
+        tree3.setRight(tree5);
+        tree2.setLeft(tree3);
+        BinaryTree<Integer> tree6 = new BinaryTree<Integer>(49);
+        BinaryTree<Integer> tree7 = new BinaryTree<Integer>(null);
+        tree6.setLeft(tree7);
+        BinaryTree<Integer> tree8 = new BinaryTree<Integer>(null);
+        tree6.setRight(tree8);
+        tree2.setRight(tree6);
+        tree1.setLeft(tree2);
+        BinaryTree<Integer> tree9 = new BinaryTree<Integer>(54);
+        BinaryTree<Integer> tree10 = new BinaryTree<Integer>(null);
+        tree9.setLeft(tree10);
+        BinaryTree<Integer> tree11 = new BinaryTree<Integer>(null);
+        tree9.setRight(tree11);
+        tree1.setRight(tree9);
+        tree0.setLeft(tree1);
+        BinaryTree<Integer> tree12 = new BinaryTree<Integer>(150);
+        BinaryTree<Integer> tree13 = new BinaryTree<Integer>(null);
+        tree12.setLeft(tree13);
+        BinaryTree<Integer> tree14 = new BinaryTree<Integer>(null);
+        tree12.setRight(tree14);
+        tree0.setRight(tree12);
+
+        assertTrue(BinaryTree.isBST(tree0));
 
     }
 
