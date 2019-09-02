@@ -125,6 +125,14 @@ public class TreeTest {
         BinaryTree<Integer> tree = new BinaryTree<>(null);
 
         assertEquals(true, BinaryTree.isBST(tree));
+    }
+
+    @Test
+    public void testIsBSTBigger() {
+        BinaryTree<Integer> t1 = new BinaryTree<>(0);
+        BinaryTree<Integer> t2 = new BinaryTree<>(-10);
+        BinaryTree<Integer> t3 = new BinaryTree<>(10);
+        BinaryTree<Integer> t4 = new BinaryTree<>(-15)
 
     }
 
