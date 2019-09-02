@@ -98,6 +98,25 @@ public class BinaryTree<E> implements Tree<E> {
         return right;
     }
 
+    private static <T extends Comparable<T>> boolean
+                isBSTHelper(BinaryTree<T> tree, T lb, T ub) {
+        BinaryTree<T> left = tree.getLeft();
+        if (left != null) {
+            if (lb != null && left.getRoot().compareTo(lb) < 0)
+                return false;
+            if (!isBSTHelper(left, lb, tree.getRoot()))
+                return false;
+        }
+        BinaryTree<T> right = tree.getRight();
+        if (right != null) {
+            if (ub != null && right.getRoot().compareTo(ub) > 0)
+                return false;
+            if (!isBSTHelper(right, tree.getRoot(), ub))
+                return false;
+        }
+        return true;
+    }
+
     /**
      * Determines whether the parameter tree is a binary search tree or not
      * This is determined by the definition of a binary search tree provided in the lectures
@@ -106,6 +125,6 @@ public class BinaryTree<E> implements Tree<E> {
      * @return true if this tree is a BST, otherwise false
      */
     public static <T extends Comparable<T>> boolean isBST(BinaryTree<T> tree) {
-        return false; // TODO: implement this method
+        return isBSTHelper(tree, null, null);
     }
 }

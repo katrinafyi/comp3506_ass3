@@ -30,6 +30,8 @@ public class TreeIterator<E> implements Iterator<E> {
         if (!hasNext())
             throw new NoSuchElementException("Iterator has no next.");
         Tree<E> nextTree = stack.pop();
+        // pop current node before iterating over its children, because
+        // this is a preorder.
         List<Tree<E>> children = nextTree.getChildren();
         for (int i = 0; i < children.size(); i++) {
             // iterate backwards so leftmost child is on top of the stack.
