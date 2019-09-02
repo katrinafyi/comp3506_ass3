@@ -6,6 +6,29 @@ import static org.junit.Assert.*;
 
 public class TreeTest {
 
+    @Test
+    public void testIterator() {
+        StandardTree<Integer> tree = new StandardTree<>(10);
+
+        StandardTree<Integer> child1 = new StandardTree<>(1);
+        StandardTree<Integer> child2 = new StandardTree<>(2);
+        StandardTree<Integer> child3 = new StandardTree<>(3);
+        tree.addChild(child1);
+        tree.addChild(child2);
+        tree.addChild(child3);
+
+        StandardTree<Integer> child4 = new StandardTree<>(100);
+        child2.addChild(child4);
+
+        TreeIterator<Integer> it = new TreeIterator<>(tree);
+        assertEquals(10, (long)it.next());
+        assertEquals(1, (long)it.next());
+        assertEquals(2, (long)it.next());
+        assertEquals(100, (long)it.next());
+        assertEquals(3, (long)it.next());
+        assertFalse(it.hasNext());
+    }
+
     @Test(timeout=1000)
     public void testHasNext() {
         BinaryTree<Integer> root = new BinaryTree<>(1);
