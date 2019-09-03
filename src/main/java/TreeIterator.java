@@ -20,11 +20,35 @@ public class TreeIterator<E> implements Iterator<E> {
         stack.add(root);
     }
 
+    /**
+     * Checks if the iterator has items remaining.
+     *
+     * This method has complexity of O(1) (always), because it only needs to
+     * test whether a stack has items.
+     *
+     * @return True if next() can be called successfully.
+     */
     @Override
     public boolean hasNext() {
         return !stack.isEmpty();
     }
 
+    /**
+     * Returns the next item in the iterator in a preorder traversal of a tree.
+     *
+     * This method has worst-case complexity of O(k) where k is maximum number
+     * of children one node can have in the tree. However, its amortised time
+     * complexity is O(1) because the O(k) call occurs once for each parent
+     * node, then is O(1) for the k child nodes (unless they are also
+     * parent nodes, in which case the amortisation flows onto their
+     * children as well.)
+     *
+     * Overall, repeatedly calling next() and exhausting the iterator will
+     * take O(n) time, where n is the number of nodes in the tree.
+     *
+     * @return Next value in tree.
+     * @throws NoSuchElementException If iterator is empty.
+     */
     @Override
     public E next() {
         if (!hasNext())

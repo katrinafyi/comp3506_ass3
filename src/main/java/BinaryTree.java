@@ -117,32 +117,63 @@ public class BinaryTree<E> implements Tree<E> {
      * @param <T> Comparable type of values in BST.
      * @return True if tree is a BST, false otherwise.
      */
-    private static <T extends Comparable<T>> boolean
-            isBSTSubtree(BinaryTree<T> tree, T lb, T ub) {
+    private static <T extends Comparable<T>> boolean isBSTSubtree(
+            BinaryTree<T> tree, T lb, T ub) {
+        // in a valid tree, this helper will never be called with a null tree.
         if (tree == null)
             return false;
+        // if a tree has a null value, it must be an endpoint so must have null
+        // children.
         if (tree.getRoot() == null)
             return tree.isLeaf();
 
+        // test if this tree's value is within the bounds.
         if (lb != null && tree.getRoot().compareTo(lb) < 0)
             return false;
         if (ub != null && tree.getRoot().compareTo(ub) > 0)
             return false;
 
+        // recurse onto the left subtree, tightening the upper bound to this
+        // node's value.
         BinaryTree<T> left = tree.getLeft();
         if (!isBSTSubtree(left, lb, tree.getRoot()))
             return false;
 
+        // similarly for the right subtree.
         BinaryTree<T> right = tree.getRight();
         if (!isBSTSubtree(right, tree.getRoot(), ub))
             return false;
 
+        // if all the above conditions passed, this is a valid binary tree.
         return true;
     }
 
     /**
      * Determines whether the parameter tree is a binary search tree or not
-     * This is determined by the definition of a binary search tree provided in the lectures
+     * This is determined by the definition of a binary search tree provided
+     * in the lectures.
+     *
+     * This function is defined recursively. If the tree has n items, its
+     * running time, T(n), is
+     *
+     *  T(1) = O(1)
+     *  T(n) = T(p(n-1)) + T((1-p)(n-1)) + O(1)
+     *
+     * where p is the proportion of children in the left subtree of each node.
+     * For simplicity, we assume this is constant across all nodes. In fact,
+     * it can be shown that T(n) is a linear function so p does not matter.
+     * That is,
+     *
+     *  T(n) = T(p(n-1)) + T((1-p)(n-1)) + O(1)
+     *       = T( (p + 1-p) (n-1) ) + O(1)
+     *       = T(n-1) + O(1)
+     *
+     * Therefore, an explicit expression for T(n) is
+     *
+     *  T(n) = n O(1)
+     *
+     * so isBST runs in linear time, O(n).
+     *
      *
      * @param tree the tree to check
      * @return true if this tree is a BST, otherwise false
