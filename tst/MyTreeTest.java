@@ -17,16 +17,25 @@ public class MyTreeTest {
         return new HashSet<>(Arrays.asList(objects));
     }
 
+    public static <T> BinaryTree<T> makeTree(T root, BinaryTree<T> left,
+                                             BinaryTree<T> right) {
+
+        BinaryTree<T> tree = new BinaryTree<>(root);
+        tree.setLeft(left);
+        tree.setRight(right);
+        return tree;
+    }
+
+    public static BinaryTree<PrereqNode> makeCourse(String course) {
+        return new BinaryTree<>(new PrereqNode(course));
+    }
+
     @Before
     public void setup() {
-        and = new PrereqNode(PrereqNode.PrereqType.AND);
-        or = new PrereqNode(PrereqNode.PrereqType.OR);
-        prereqTree = PrereqNode.makeTree(or,
-                PrereqNode.makeCourse("CSSE2310"),
-                PrereqNode.makeTree(and,
-                        PrereqNode.makeCourse("CSSE1001"),
-                        PrereqNode.makeCourse("CSSE2002")
-                )
+        prereqTree = makeTree(PrereqNode.or(),
+                makeCourse("CSSE2310"),
+                makeTree(PrereqNode.and(),
+                        makeCourse("CSSE1001"), makeCourse("CSSE2002"))
         );
     }
 

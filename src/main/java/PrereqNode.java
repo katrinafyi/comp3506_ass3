@@ -2,14 +2,17 @@ import java.util.Set;
 import java.util.function.BinaryOperator;
 
 public class PrereqNode {
-    public enum PrereqType {
+    private enum PrereqType {
         COURSE, AND, OR
     }
 
     private final PrereqType type;
     private final String course;
 
-    public PrereqNode(PrereqType type) {
+    private static final PrereqNode andNode = new PrereqNode(PrereqType.AND);
+    private static final PrereqNode orNode = new PrereqNode(PrereqType.OR);
+
+    private PrereqNode(PrereqType type) {
         if (type == PrereqType.COURSE)
             throw new IllegalArgumentException("Course node must have a course.");
         this.type = type;
@@ -21,20 +24,15 @@ public class PrereqNode {
         this.course = course;
     }
 
-    public static BinaryTree<PrereqNode> makeTree(PrereqNode root,
-                  BinaryTree<PrereqNode> left, BinaryTree<PrereqNode> right) {
-
-        BinaryTree<PrereqNode> tree = new BinaryTree<>(root);
-        tree.setLeft(left);
-        tree.setRight(right);
-
-        return tree;
+    public static PrereqNode or() {
+        return orNode;
     }
 
-    public static BinaryTree<PrereqNode> makeCourse(String course) {
-        BinaryTree<PrereqNode> tree = new BinaryTree<>(new PrereqNode(course));
-        return tree;
+    public static PrereqNode and() {
+        return andNode;
     }
+
+
 
     public static boolean evaluate(BinaryTree<PrereqNode> tree,
                                    Set<String> courses) {
