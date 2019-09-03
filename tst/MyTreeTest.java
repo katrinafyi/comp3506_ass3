@@ -10,8 +10,6 @@ import static org.junit.Assert.*;
 public class MyTreeTest {
 
     private BinaryTree<PrereqNode> prereqTree;
-    private PrereqNode and;
-    private PrereqNode or;
 
     private static Set<String> makeSet(String... objects) {
         return new HashSet<>(Arrays.asList(objects));
