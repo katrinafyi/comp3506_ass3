@@ -139,7 +139,7 @@ public class BinaryTree<E> implements Tree<E> {
         if (!isBSTSubtree(left, lb, tree.getRoot()))
             return false;
 
-        // similarly for the right subtree.
+        // similarly for the right subtree and lower bound
         BinaryTree<T> right = tree.getRight();
         if (!isBSTSubtree(right, tree.getRoot(), ub))
             return false;
@@ -173,6 +173,8 @@ public class BinaryTree<E> implements Tree<E> {
      *  T(n) = n O(1)
      *
      * so isBST runs in linear time, O(n).
+     *
+     * We assume the tree operations are O(1).
      *
      *
      * @param tree the tree to check

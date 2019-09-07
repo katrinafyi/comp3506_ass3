@@ -46,6 +46,8 @@ public class TreeIterator<E> implements Iterator<E> {
      * Overall, repeatedly calling next() and exhausting the iterator will
      * take O(n) time, where n is the number of nodes in the tree.
      *
+     * We assume that the stack and tree operations are O(1).
+     *
      * @return Next value in tree.
      * @throws NoSuchElementException If iterator is empty.
      */
