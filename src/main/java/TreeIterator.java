@@ -24,7 +24,7 @@ public class TreeIterator<E> implements Iterator<E> {
      * Checks if the iterator has items remaining.
      *
      * This method has complexity of O(1) (always), because it only needs to
-     * test whether a stack has items.
+     * test whether a stack has items. We assume the stack isEmpty is O(1).
      *
      * @return True if next() can be called successfully.
      */
