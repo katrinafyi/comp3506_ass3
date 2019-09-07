@@ -174,7 +174,7 @@ public class BinaryTree<E> implements Tree<E> {
      *
      * so isBST runs in linear time, O(n).
      *
-     * We assume the tree operations are O(1).
+     * We assume the tree and comparison operations are O(1).
      *
      *
      * @param tree the tree to check

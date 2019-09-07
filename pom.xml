@@ -34,6 +34,7 @@
                         <param>BinaryTree</param>
                         <param>StandardTree</param>
                         <param>TreeIterator</param>
+                        <param>LogicNode</param>
                     </targetClasses>
                     <targetTests>
                         <param>*</param>
