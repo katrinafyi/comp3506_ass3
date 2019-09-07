@@ -1,0 +1,20 @@
+{
+    "src": {
+        "src_path": "src/main/java",
+        "dest_path": "",
+        "include": [
+            "BinaryTree.java",
+            "LogicNode.java",
+            "TreeIterator.java"
+        ],
+        "glob": false,
+        "clean": false
+    },
+    "tests": {
+        "src_path": "tst",
+        "dest_path": "",
+        "include": [
+            "MyTreeTest.java"
+        ]
+    }
+}
