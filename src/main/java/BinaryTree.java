@@ -103,8 +103,7 @@ public class BinaryTree<E> implements Tree<E> {
      * it tests if tree is a BST and its elements are >= lb and <= ub.
      *
      * By definition, the last value-containing node in a branch must have two
-     * child nodes--both with null values and no children. Yes, this definition
-     * sucks. Direct your complaint to Goodrich, Tamassia and Goldwasser.
+     * child nodes--both with null values and no children.
      *
      * This implementation will reject (i.e. return false for) any tree
      * which does not meet the above criteria. Note that this function is called
@@ -122,7 +121,7 @@ public class BinaryTree<E> implements Tree<E> {
         // in a valid tree, this helper will never be called with a null tree.
         if (tree == null)
             return false;
-        // if a tree has a null value, it must be an endpoint so must have null
+        // if a tree has a null value, it must be an endpoint so must have no
         // children.
         if (tree.getRoot() == null)
             return tree.isLeaf();

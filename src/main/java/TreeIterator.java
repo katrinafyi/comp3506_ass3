@@ -47,9 +47,13 @@ public class TreeIterator<E> implements Iterator<E> {
      * take O(n) time, where n is the number of nodes in the tree.
      *
      * We assume that the stack and tree operations are O(1), with the exception
-     * of the tree's getChildren() which may be O(k) worst-case (remember,
-     * k is number of children). However, this is amortised O(1) for the same
-     * reason as above.
+     * of the tree's stack.add() which may be O(n) worst-case if it needs to
+     * resize the internal data structure, where n is total number of nodes.
+     * However, this is amortised O(1) for the same reason as above.
+     *
+     * Depending on the implementation, .getChildren() could also be O(k)
+     * where k is number of children of this node. This is also amortised over
+     * k calls to become O(1). For this reason, we take it to be O(1).
      *
      * @return Next value in tree.
      * @throws NoSuchElementException If iterator is empty.
